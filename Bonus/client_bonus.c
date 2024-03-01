@@ -6,7 +6,7 @@
 /*   By: sdell-er <sdell-er@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:42:50 by sdell-er          #+#    #+#             */
-/*   Updated: 2024/02/27 19:24:49 by sdell-er         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:09:31 by sdell-er         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ static void	send_c(unsigned char c, int pid)
 		if (kill(pid, sig) == -1)
 			exit(EXIT_FAILURE);
 		c /= 2;
-		signal(SIGUSR1, set_received);
 		pause();
+		usleep(1);
 		i++;
 	}
-	usleep(1);
 }
 
 int	main(int argc, char **argv)
@@ -44,6 +43,8 @@ int	main(int argc, char **argv)
 	int	s_pid;
 	int	i;
 
+	signal(SIGUSR1, set_received);
+	signal(SIGUSR2, set_received);
 	if (argc != 3)
 	{
 		ft_printf("Error\nValid parameters: <server_pid> <string_to_send>");
@@ -59,8 +60,6 @@ int	main(int argc, char **argv)
 	while (argv[2][i])
 		send_c(argv[2][i++], s_pid);
 	send_c(argv[2][i], s_pid);
-	signal(SIGUSR2, set_received);
-	pause();
 	ft_printf("Message received!");
 	return (0);
 }

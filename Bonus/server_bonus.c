@@ -6,7 +6,7 @@
 /*   By: sdell-er <sdell-er@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:42:30 by sdell-er          #+#    #+#             */
-/*   Updated: 2024/02/27 18:02:19 by sdell-er         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:09:28 by sdell-er         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ static int	ft_pow(int n, int exp)
 static void	print_c(int pid, unsigned char c)
 {
 	ft_printf("%c", c);
-	if (kill(pid, SIGUSR1) == -1)
-		exit(EXIT_FAILURE);
 	if (c == 0)
 	{
-		usleep(1);
 		if (kill(pid, SIGUSR2) == -1)
 			exit(EXIT_FAILURE);
 		ft_printf("\n");
+	}
+	else
+	{		
+		if (kill(pid, SIGUSR1) == -1)
+			exit(EXIT_FAILURE);
 	}
 }
 
@@ -48,6 +50,7 @@ static void	add(int signum, siginfo_t *info, void *context)
 	if (signum == SIGUSR1)
 		c += ft_pow(2, e);
 	e++;
+	usleep(1);
 	if (kill(info->si_pid, SIGUSR1) == -1)
 		exit(EXIT_FAILURE);
 	if (e == 8)

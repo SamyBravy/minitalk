@@ -6,7 +6,7 @@
 /*   By: sdell-er <sdell-er@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:47:04 by sdell-er          #+#    #+#             */
-/*   Updated: 2024/02/27 15:41:48 by sdell-er         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:14:12 by sdell-er         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	add_c(int signum, siginfo_t *info, void *context)
 	(void)signum;
 	(void)context;
 	g_c++;
+	usleep(1);
 	if (kill(info->si_pid, SIGUSR1) == -1)
 		exit(EXIT_FAILURE);
 }
@@ -27,14 +28,17 @@ static void	print_c(int signum, siginfo_t *info, void *context)
 	(void)context;
 	g_c--;
 	ft_printf("%c", g_c);
-	if (kill(info->si_pid, SIGUSR1) == -1)
-		exit(EXIT_FAILURE);
 	if (g_c == 0)
 	{
 		usleep(1);
 		if (kill(info->si_pid, SIGUSR2) == -1)
 			exit(EXIT_FAILURE);
 		ft_printf("\n");
+	}
+	else
+	{
+		if (kill(info->si_pid, SIGUSR1) == -1)
+			exit(EXIT_FAILURE);
 	}
 	g_c = 0;
 }
