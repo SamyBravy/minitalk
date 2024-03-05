@@ -6,7 +6,7 @@
 /*   By: sdell-er <sdell-er@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:42:30 by sdell-er          #+#    #+#             */
-/*   Updated: 2024/03/01 16:09:28 by sdell-er         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:48:46 by sdell-er         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	print_c(int pid, unsigned char c)
 		ft_printf("\n");
 	}
 	else
-	{		
+	{
 		if (kill(pid, SIGUSR1) == -1)
 			exit(EXIT_FAILURE);
 	}

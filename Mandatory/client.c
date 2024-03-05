@@ -6,7 +6,7 @@
 /*   By: sdell-er <sdell-er@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:47:12 by sdell-er          #+#    #+#             */
-/*   Updated: 2024/03/01 16:13:29 by sdell-er         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:52:40 by sdell-er         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,27 @@
 static void	set_received(int signum)
 {
 	(void)signum;
-	g_received = 1;
 }
 
 static void	send_c(unsigned char c, int pid)
 {
-	while (1)
+	int	i;
+	int	sig;
+
+	i = 0;
+	while (i < 8)
 	{
-		g_received = 0;
-		if (kill(pid, SIGUSR1) == -1)
+		if (c % 2)
+			sig = SIGUSR1;
+		else
+			sig = SIGUSR2;
+		if (kill(pid, sig) == -1)
 			exit(EXIT_FAILURE);
-		while (!g_received)
-			pause();
+		c /= 2;
+		pause();
 		usleep(1);
-		if (c == 0)
-			break ;
-		c--;
+		i++;
 	}
-	if (kill(pid, SIGUSR2) == -1)
-		exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv)
@@ -41,6 +43,8 @@ int	main(int argc, char **argv)
 	int	s_pid;
 	int	i;
 
+	signal(SIGUSR1, set_received);
+	signal(SIGUSR2, set_received);
 	if (argc != 3)
 	{
 		ft_printf("Error\nValid parameters: <server_pid> <string_to_send>");
@@ -52,15 +56,10 @@ int	main(int argc, char **argv)
 		ft_printf("Error: invalid PID");
 		exit(EXIT_FAILURE);
 	}
-	signal(SIGUSR1, set_received);
-	signal(SIGUSR2, set_received);
 	i = 0;
 	while (argv[2][i])
 		send_c(argv[2][i++], s_pid);
 	send_c(argv[2][i], s_pid);
-	g_received = 0;
-	while (!g_received)
-		pause();
 	ft_printf("Message received!");
 	return (0);
 }

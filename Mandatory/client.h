@@ -6,7 +6,7 @@
 /*   By: sdell-er <sdell-er@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:47:50 by sdell-er          #+#    #+#             */
-/*   Updated: 2024/02/27 14:07:08 by sdell-er         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:53:45 by sdell-er         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,5 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-
-int	g_received;
 
 #endif
