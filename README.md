@@ -1,43 +1,57 @@
+# 📡 Minitalk
 
-# **minitalk**
-Creating a small data exchange program using UNIX signals
+![Language](https://img.shields.io/badge/Language-C-blue)
 
-## **Project overview**
-The **minitalk** project is an integral part of the **42 curriculum**.
-It tasks students with creating a communication program consisting of a client and a server, using UNIX signals for data exchange.
-This project aims to enhance understanding of inter-process communication, signal handling, and efficient coding practices in C.
+## 📝 Overview
 
-#### **Objective**
-- **Create Client and Server Programs**: Develop a client and a server program for data exchange using UNIX signals.
-- **Signal Handling**: Implement robust signal handling to ensure reliable communication between the client and server.
-- **Error Handling**: Ensure thorough error handling to prevent unexpected crashes (segmentation faults, bus errors, etc.).
-- **Memory Management**: Properly manage dynamic memory allocation to avoid memory leaks.
-- **Bonus**: Implement additional features such as server acknowledgment of messages and support for Unicode characters.
+**Minitalk** is a small data exchange program using UNIX signals. It consists of a client and a server that communicate using only `SIGUSR1` and `SIGUSR2`.
 
-#### **Key features**
-- **Client-Server Communication**: Implement communication between a client and a server using only the `SIGUSR1` and `SIGUSR2` signals.
-- **PID Management**: The server prints its PID on startup, and the client uses this PID to send messages to the server.
-- **String Transmission**: The client sends a string to the server, which then prints the received string.
-- **Multiple Clients**: The server can handle strings from multiple clients sequentially without needing a restart.
-- **Bonus Features**:
-  - **Acknowledgment**: The server sends a signal back to the client to acknowledge each received message.
-  - **Unicode Support**: Support for sending and receiving Unicode characters.
+This project explores:
+-   **Inter-Process Communication (IPC)** using signals.
+-   **Signal Handling** in C.
+-   **Bitwise Operations** to transmit data.
 
-#### **Compiling the Project**
-The minitalk project includes a Makefile for easy compilation.
-Simply run:
+## 🚀 Features
+
+-   **Server**: Prints its PID and waits for signals.
+-   **Client**: Takes the server's PID and a string, sending the string char by char (bit by bit).
+-   **Reliability**: Handles multiple clients and ensures message integrity.
+-   **Bonus**:
+    -   Unicode support (UTF-8).
+    -   Server acknowledgement (ping-pong signals).
+
+## 🛠️ Installation & Usage
+
+### Compilation
+Use the `Makefile` to compile the project:
+
 ```bash
-make
+make        # Compiles Mandatory part
+make bonus  # Compiles Bonus part
 ```
-This will generate the client and server executables.
 
-#### **Running the Project**
-To start the server, run:
-```bash
-./server
-```
-The server will print its PID.
-Use this PID to send a message from the client:
-```bash
-./client <server_pid> "Hello, world!"
-```
+### Running
+
+1.  **Start the Server**:
+    ```bash
+    ./server
+    ```
+    The server will print its PID (e.g., `12345`).
+
+2.  **Run the Client**:
+    ```bash
+    ./client <PID> "Hello, Minitalk!"
+    ```
+    Replace `<PID>` with the server's PID.
+
+## 📂 Project Structure
+
+-   `Mandatory/`: Core implementation.
+-   `Bonus/`: Extended features (acknowledgement, Unicode).
+-   `my_lib/`: Custom library (Libft, ft_printf).
+
+## ⚠️ Requirements
+
+-   GCC compiler
+-   Make
+-   UNIX environment (Linux/macOS)
