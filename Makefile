@@ -38,12 +38,13 @@ $(NAME_S): $(OBJ_S)
 clean:
 	@make clean -C $(MY_LIB) > /dev/null
 	@rm -f $(OBJ_C) $(OBJ_S)
-	@echo "\e[0;91m[$(NAME_C)] deleted!\e[0m"
-	@echo "\e[0;91m[$(NAME_S)] deleted!\e[0m"
+	@echo "\e[0;91mcleaned!\e[0m"
 
 fclean: clean
 	@make fclean -C $(MY_LIB) > /dev/null
 	@rm -f $(NAME_C) $(NAME_S)
+	@echo "\e[0;91m[$(NAME_C)] deleted!\e[0m"
+	@echo "\e[0;91m[$(NAME_S)] deleted!\e[0m"
 
 re: fclean all
 
