@@ -16,9 +16,8 @@ This project explores:
 -   **Server**: Prints its PID and waits for signals.
 -   **Client**: Takes the server's PID and a string, sending the string char by char (bit by bit).
 -   **Reliability**: Handles multiple clients and ensures message integrity.
--   **Bonus**:
-    -   Unicode support (UTF-8).
-    -   Server acknowledgement (ping-pong signals).
+-   Unicode support (UTF-8).
+-   Server acknowledgement (ping-pong signals).
 
 ## 🛠️ Installation & Usage
 
@@ -26,8 +25,7 @@ This project explores:
 Use the `Makefile` to compile the project:
 
 ```bash
-make        # Compiles Mandatory part
-make bonus  # Compiles Bonus part
+make        # Compiles the project
 ```
 
 ### Running
@@ -46,8 +44,7 @@ make bonus  # Compiles Bonus part
 
 ## 📂 Project Structure
 
--   `Mandatory/`: Core implementation.
--   `Bonus/`: Extended features (acknowledgement, Unicode).
+-   `srcs/`: Source code (client and server).
 -   `my_lib/`: Custom library (Libft, ft_printf).
 
 ## ⚠️ Requirements
